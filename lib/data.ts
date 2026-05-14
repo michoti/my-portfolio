@@ -1,0 +1,200 @@
+export const bio = {
+  name: "Alex Cipher",
+  title: "Senior Software Engineer",
+  tagline: "Building systems that scale. Breaking things to understand them. Shipping things that matter.",
+  summary: `I'm a full-stack engineer with 7+ years of experience architecting high-performance systems at the intersection of product and infrastructure. 
+  I thrive in environments where hard problems meet creative solutions — from distributed microservices to pixel-perfect UIs. 
+  Currently obsessed with AI-native applications, real-time data pipelines, and making developer tooling delightful.
+  When I'm not in the terminal, I'm contributing to open source, mentoring junior engineers, or thinking about the philosophy of computation.`,
+  location: "Nairobi, Kenya",
+  email: "alex@cipher.dev",
+  github: "https://github.com",
+  linkedin: "https://linkedin.com",
+  twitter: "https://twitter.com",
+  availableForWork: true,
+}
+
+export const projects = [
+  {
+    id: 1,
+    title: "NexusDB",
+    description: "A distributed time-series database built in Go, optimized for IoT telemetry at 1M+ writes/sec. Features automatic sharding, replication, and a custom query language.",
+    tech: ["Go", "gRPC", "Raft Consensus", "LevelDB", "Kubernetes"],
+    status: "Production",
+    stars: 2400,
+    link: "#",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Synapse AI",
+    description: "Real-time collaborative AI workspace with multi-model routing, context-aware prompting, and shared memory graphs. Built for teams running large-scale LLM workflows.",
+    tech: ["Next.js", "Python", "LangGraph", "Redis", "PostgreSQL"],
+    status: "Beta",
+    stars: 890,
+    link: "#",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "FlowCraft",
+    description: "Visual workflow automation platform with 200+ integrations. Processes 50M+ events daily across thousands of business customers.",
+    tech: ["TypeScript", "Node.js", "React Flow", "Temporal", "Kafka"],
+    status: "Production",
+    stars: 1100,
+    link: "#",
+    featured: true,
+  },
+  {
+    id: 4,
+    title: "Keystone CLI",
+    description: "Zero-config secrets management CLI. Encrypts, syncs, and rotates credentials across teams without leaving the terminal.",
+    tech: ["Rust", "AES-256", "AWS KMS", "TOML"],
+    status: "Production",
+    stars: 670,
+    link: "#",
+    featured: false,
+  },
+  {
+    id: 5,
+    title: "OpenTrace",
+    description: "Lightweight distributed tracing library for Node.js microservices. Drop-in OpenTelemetry-compatible with Flamegraph visualization.",
+    tech: ["Node.js", "OpenTelemetry", "D3.js", "ClickHouse"],
+    status: "Active",
+    stars: 430,
+    link: "#",
+    featured: false,
+  },
+  {
+    id: 6,
+    title: "GridLock Game Engine",
+    description: "Browser-based 2D game engine with ECS architecture, WebGL renderer, and a visual scene editor. No dependencies.",
+    tech: ["TypeScript", "WebGL", "WASM", "Web Workers"],
+    status: "Experimental",
+    stars: 320,
+    link: "#",
+    featured: false,
+  },
+]
+
+export const experience = [
+  {
+    id: 1,
+    company: "Meridian Systems",
+    role: "Staff Software Engineer",
+    period: "2022 — Present",
+    duration: "3 yrs",
+    location: "Remote / Nairobi",
+    description: "Leading architecture for a real-time financial data platform processing $2B+ in daily transactions. Reduced system latency by 60% through query optimization and caching layers. Mentoring a team of 8 engineers.",
+    highlights: [
+      "Designed event-sourced architecture handling 500K concurrent users",
+      "Led migration from monolith to microservices — zero downtime",
+      "Reduced infrastructure costs by 40% via intelligent autoscaling",
+      "Authored internal engineering design doc standards adopted company-wide",
+    ],
+    tech: ["Go", "Kafka", "PostgreSQL", "Redis", "Terraform", "AWS"],
+    type: "full-time",
+  },
+  {
+    id: 2,
+    company: "Forge Labs",
+    role: "Senior Software Engineer",
+    period: "2020 — 2022",
+    duration: "2 yrs",
+    location: "Nairobi, Kenya",
+    description: "Full-stack development on a SaaS platform serving 50K+ SMBs across East Africa. Owned the payments infrastructure and real-time reporting dashboard.",
+    highlights: [
+      "Built M-Pesa integration processing 10K+ daily transactions",
+      "Architected multi-tenant database schema supporting 200+ clients",
+      "Shipped real-time analytics dashboard used by C-suite daily",
+    ],
+    tech: ["React", "Node.js", "TypeScript", "MySQL", "Docker"],
+    type: "full-time",
+  },
+  {
+    id: 3,
+    company: "PixelBridge Studio",
+    role: "Software Engineer",
+    period: "2018 — 2020",
+    duration: "2 yrs",
+    location: "Nairobi, Kenya",
+    description: "Built and maintained web applications for clients across fintech, healthtech, and e-commerce. Owned frontend architecture and API design.",
+    highlights: [
+      "Delivered 12 client projects from scoping to production",
+      "Introduced TypeScript and testing culture — coverage went from 0% to 80%",
+      "Built custom CMS used by 3 media companies",
+    ],
+    tech: ["Vue.js", "Laravel", "PHP", "MySQL", "AWS S3"],
+    type: "full-time",
+  },
+  {
+    id: 4,
+    company: "Open Source",
+    role: "Contributor & Maintainer",
+    period: "2017 — Present",
+    duration: "Ongoing",
+    location: "Remote",
+    description: "Active contributor to several open source projects. Maintain two libraries with 3K+ combined GitHub stars.",
+    highlights: [
+      "Merged 40+ PRs across major Node.js ecosystem projects",
+      "NexusDB: 2.4K stars, 120+ contributors",
+      "Keystone CLI: 670 stars, actively maintained",
+    ],
+    tech: ["Go", "Rust", "TypeScript", "Node.js"],
+    type: "open-source",
+  },
+]
+
+export const skillCategories = [
+  {
+    name: "Languages",
+    icon: "Code2",
+    skills: [
+      { name: "TypeScript", level: 95 },
+      { name: "Go", level: 88 },
+      { name: "Python", level: 82 },
+      { name: "Rust", level: 65 },
+      { name: "SQL", level: 90 },
+    ],
+  },
+  {
+    name: "Frontend",
+    icon: "Monitor",
+    skills: [
+      { name: "React / Next.js", level: 95 },
+      { name: "Vue.js", level: 80 },
+      { name: "Tailwind CSS", level: 92 },
+      { name: "Framer Motion", level: 78 },
+      { name: "WebGL / Three.js", level: 60 },
+    ],
+  },
+  {
+    name: "Backend & Data",
+    icon: "Server",
+    skills: [
+      { name: "Node.js", level: 93 },
+      { name: "PostgreSQL", level: 90 },
+      { name: "Redis", level: 85 },
+      { name: "Kafka", level: 80 },
+      { name: "GraphQL", level: 82 },
+    ],
+  },
+  {
+    name: "Infrastructure",
+    icon: "Cloud",
+    skills: [
+      { name: "AWS", level: 85 },
+      { name: "Kubernetes", level: 78 },
+      { name: "Docker", level: 90 },
+      { name: "Terraform", level: 75 },
+      { name: "CI/CD", level: 88 },
+    ],
+  },
+]
+
+export const tools = [
+  "VS Code", "Neovim", "Cursor", "Warp Terminal",
+  "Figma", "Linear", "Notion", "Postman",
+  "DataDog", "Sentry", "Grafana", "PlanetScale",
+  "Vercel", "Railway", "Cloudflare", "GitHub Actions",
+]
