@@ -2,12 +2,14 @@ import MatrixRain from "@/components/MatrixRain";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "../components/sections/AboutSection";
+import Tracker from "@/components/Tracker";
 
 export default function Home() {
   return (
       <main className="relative min-h-screen" style={{ background: '#1C1C1C' }}>
         <MatrixRain />
         <Navigation />
+        <Tracker />
 
         {/* Noise overlay */}
         <div
