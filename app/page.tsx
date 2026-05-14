@@ -1,6 +1,7 @@
 import MatrixRain from "@/components/MatrixRain";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "../components/sections/AboutSection";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         {/* Content */}
         <div style={{ position: 'relative', zIndex: 1 }}>
           <HeroSection />
+          <AboutSection />
         </div>
 
       </main>
