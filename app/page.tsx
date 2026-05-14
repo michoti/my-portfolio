@@ -3,6 +3,9 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "../components/sections/AboutSection";
 import Tracker from "@/components/Tracker";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import SkillsSection from "@/components/sections/SkillsSection";
 
 export default function Home() {
   return (
@@ -24,6 +27,9 @@ export default function Home() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <HeroSection />
           <AboutSection />
+          <ProjectsSection />
+          <ExperienceSection />
+          <SkillsSection />
         </div>
 
       </main>
