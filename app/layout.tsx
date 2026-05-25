@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Geist, Orbitron, Rajdhani, Roboto } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -27,17 +27,21 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Cipher | Software Engineer",
+  title: 'Emmanuel Michoti — Software Engineer',
   description:
-    "Full-stack engineer building systems that scale. Open to opportunities.",
-  keywords: [
-    "software engineer",
-    "full-stack",
-    "TypeScript",
-    "Go",
-    "React",
-    "Next.js",
-  ],
+    'Fullstack Developer based in Nairobi, Kenya. Specializing in Laravel, React, Next.js, and cloud-native web applications.',
+  keywords: ['Fullstack Developer', 'Laravel', 'React', 'Next.js', 'Nairobi', 'Kenya'],
+  authors: [{ name: 'Emmanuel Michoti Mogendi' }],
+  openGraph: {
+    title: 'Emmanuel Michoti — Software Engineer',
+    description: 'Building resilient, scalable web systems with meticulous attention to craft.',
+    type: 'website',
+  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -49,14 +53,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "scroll-smooth font-sans",
+        "scroll-smooth",
         geist.variable,
         orbitron.variable,
         rajdhani.variable,
         roboto.variable
       )}
+      suppressHydrationWarning
     >
-      <body className="antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
