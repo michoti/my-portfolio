@@ -98,8 +98,8 @@ export default function ProjectsSection() {
         {/* Picasso-inspired broken grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
           {PROJECTS.map((project, i) => {
-            const colSpans = [7, 5, 12];
-            const colSpan = colSpans[i] ?? 12;
+            const colSpans = ['lg:col-span-7', 'lg:col-span-5', 'lg:col-span-12'];
+            const colSpanClass = colSpans[i] ?? 'lg:col-span-12';
             const offsetTop = i === 1 ? 60 : 0;
 
             return (
@@ -109,7 +109,7 @@ export default function ProjectsSection() {
                 variants={cardVariants}
                 initial="hidden"
                 animate={isInView ? 'visible' : 'hidden'}
-                className={`lg:col-span-${colSpan} bento-card group relative overflow-hidden`}
+                className={`bento-card group relative overflow-hidden ${colSpanClass}`}
                 style={{ marginTop: offsetTop }}
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.4 }}

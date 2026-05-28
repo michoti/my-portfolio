@@ -124,7 +124,7 @@ export default function ContactSection() {
                     href={link.href}
                     target={link.href.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-5 py-4 transition-all duration-300"
+                    className="group flex items-center gap-9 py-4 transition-all duration-300"
                     style={{
                       borderBottom: '1px solid rgba(245,232,216,0.06)',
                     }}
