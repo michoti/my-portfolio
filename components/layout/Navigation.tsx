@@ -73,7 +73,7 @@ export default function Navigation() {
                   >
                     {link.label}
                     <span
-                      className="absolute -bottom-1 left-0 h-px transition-all duration-300 group-hover:w-full"
+                      className="absolute -bottom-2 left-0 h-px transition-all duration-300 group-hover:w-full"
                       style={{
                         width: isActive ? '100%' : '0%',
                         background: 'linear-gradient(90deg, #DAA520, #FF6F61)',

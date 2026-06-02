@@ -65,10 +65,7 @@ export default function ContactSection() {
             transition={{ duration: 0.7 }}
             className="flex items-center gap-4 mb-6"
           >
-            <span className="font-orbitron text-xs tracking-[0.5em] uppercase" style={{ color: '#FF6F61' }}>
-              05
-            </span>
-            <div className="h-px w-16" style={{ background: 'rgba(255,111,97,0.3)' }} />
+            <div className="h-px flex-1 max-w-24" style={{ background: '#FF6F61' }} />
             <span className="font-rajdhani text-xs tracking-[0.4em] uppercase" style={{ color: 'rgba(245,232,216,0.4)' }}>
               Let&apos;s Talk
             </span>
