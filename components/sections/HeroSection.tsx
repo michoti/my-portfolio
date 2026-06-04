@@ -1,179 +1,266 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { bio } from '@/lib/data'
-import { usePortfolioStore } from '@/store/portfolio'
-import { trackActivity } from '@/lib/actions/track-activity'
+'use client';
 
-const TITLES = [
-  'Software Engineer',
-  'Systems Architect',
-  'Open Source Builder',
-  'Backend Specialist',
-  'Full-Stack Developer',
-]
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { UNSPLASH_IMAGES } from '@/lib/data';
+import {
+  HexGrid,
+  CircuitLines,
+  OrbitRing,
+  CornerOrnament,
+  BrushStroke,
+} from '@/components/ui/SvgArtwork';
 
 export default function HeroSection() {
-  const [titleIdx, setTitleIdx] = useState(0)
-  const [displayed, setDisplayed] = useState('')
-  const [deleting, setDeleting] = useState(false)
-  const { sessionId, setResumeDownloaded } = usePortfolioStore()
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
-  // Typewriter effect
-  useEffect(() => {
-    const current = TITLES[titleIdx]
-    let timeout: ReturnType<typeof setTimeout>
-
-    if (!deleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80)
-    } else if (!deleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setDeleting(true), 2000)
-    } else if (deleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40)
-    } else if (deleting && displayed.length === 0) {
-      setDeleting(false)
-      setTitleIdx((i) => (i + 1) % TITLES.length)
-    }
-
-    return () => clearTimeout(timeout)
-  }, [displayed, deleting, titleIdx])
-
-  const handleDownload = async () => {
-    if (sessionId) {
-      await trackActivity({
-        session_id: sessionId,
-        event_type: 'resume_download',
-        metadata: { section: 'hero' },
-      })
-    }
-    setResumeDownloaded(true)
-    // Create a sample resume download (in real scenario, link to actual PDF)
-    const link = document.createElement('a')
-    link.href = '/resume.pdf'
-    link.download = 'Alex_Cipher_Resume.pdf'
-    link.click()
-  }
-
-  const scrollToProjects = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const titleWords = ['Emmanuel', 'Michoti'];
 
   return (
     <section
-      id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 grid-bg"
-      style={{ zIndex: 1 }}
+      id="hero"
+      ref={ref}
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{ background: '#1C1C1C' }}
     >
-      {/* Scanline effect */}
+      {/* Background image with parallax */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y, scale }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${UNSPLASH_IMAGES.hero})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.08,
+          }}
+        />
+      </motion.div>
+
+      {/* Gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0"
         style={{
-          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)',
-          zIndex: 0,
+          background:
+            'radial-gradient(ellipse at 20% 50%, rgba(218,165,32,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,111,97,0.04) 0%, transparent 50%)',
         }}
       />
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
-        {/* Status badge */}
-        <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 border rounded-full"
-          style={{ borderColor: 'rgba(218,165,32,0.3)', background: 'rgba(218,165,32,0.05)' }}
-        >
-          <div className="w-2 h-2 rounded-full pulse-glow" style={{ background: '#DAA520' }} />
-          <span className="font-rajdhani text-sm tracking-widest" style={{ color: '#DAA520' }}>
-            {bio.availableForWork ? 'AVAILABLE FOR OPPORTUNITIES' : 'CURRENTLY UNAVAILABLE'}
-          </span>
-        </div>
+      {/* SVG Decorations */}
+      <div className="absolute top-0 left-0 w-64 h-64 opacity-30">
+        <HexGrid className="w-full h-full" />
+      </div>
+      <div className="absolute bottom-20 right-0 w-80 h-80 opacity-20">
+        <CircuitLines className="w-full h-full" />
+      </div>
+      <div className="absolute top-1/2 right-12 -translate-y-1/2 w-72 h-72 opacity-40 spin-slow">
+        <OrbitRing className="w-full h-full" />
+      </div>
 
-        {/* Name */}
-        <h1 className="font-orbitron font-black mb-4 leading-none tracking-tight"
-          style={{
-            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-            color: '#F5E8D8',
-            textShadow: '0 0 40px rgba(218,165,32,0.2)',
-          }}
+      {/* Corner ornaments */}
+      <CornerOrnament className="absolute top-24 left-6 w-12 h-12 opacity-60" />
+      <CornerOrnament
+        className="absolute bottom-8 right-6 w-12 h-12 opacity-60"
+        style={{ transform: 'rotate(180deg)' }}
+      />
+
+      {/* Main content */}
+      <motion.div
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-20"
+        style={{ opacity }}
+      >
+        {/* Eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex items-center gap-4 mb-8"
         >
-          {bio.name.split(' ').map((word, i) => (
-            <span key={i} className={i === 1 ? 'glitch' : ''} style={{ display: 'block', color: i === 1 ? '#DAA520' : '#F5E8D8' }}>
-              {word}
-            </span>
+          <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, #DAA520, transparent)' }} />
+          <span
+            className="font-rajdhani text-xs tracking-[0.4em] uppercase"
+            style={{ color: '#DAA520' }}
+          >
+            Software Engineer
+          </span>
+        </motion.div>
+
+        {/* Asymmetric title — Picasso-inspired broken grid */}
+        <div className="relative">
+          {titleWords.map((word, i) => (
+            <div
+              key={word}
+              className="overflow-hidden"
+              style={{ marginLeft: i === 1 ? 'clamp(60px, 12vw, 180px)' : '0' }}
+            >
+              <motion.h1
+                initial={{ y: '110%', opacity: 0 }}
+                animate={{ y: '0%', opacity: 1 }}
+                transition={{ duration: 1, delay: 0.4 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="font-orbitron font-900 leading-none"
+                style={{
+                  fontSize: 'clamp(3.5rem, 10vw, 9rem)',
+                  color: i === 0 ? '#F5E8D8' : 'transparent',
+                  WebkitTextStroke: i === 1 ? '1px rgba(245,232,216,0.4)' : 'none',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {word}
+              </motion.h1>
+            </div>
           ))}
-        </h1>
 
-        {/* Typewriter title */}
-        <div className="h-10 mb-8 flex items-center justify-center">
-          <span className="font-rajdhani font-semibold tracking-widest"
-            style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)', color: '#FF6F61' }}
+          {/* Large decorative name — offset/broken */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="absolute -right-8 top-6 hidden xl:block"
+            style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
           >
-            {'>> '}{displayed}
-            <span className="blink" style={{ color: '#DAA520' }}>█</span>
-          </span>
+            <span
+              className="font-rajdhani text-xs tracking-[0.5em] uppercase"
+              style={{ color: 'rgba(218,165,32,0.3)' }}
+            >
+              Available for hire
+            </span>
+          </motion.div>
         </div>
 
-        {/* Tagline */}
-        <p className="font-roboto max-w-2xl mx-auto mb-12 leading-relaxed"
-          style={{ fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', color: 'rgba(245,232,216,0.6)' }}
+        {/* Brush stroke accent */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="w-64 mt-2 mb-10 origin-left"
         >
-          {bio.tagline}
-        </p>
+          <BrushStroke className="w-full" color="#FF6F61" />
+        </motion.div>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={scrollToProjects}
-            className="group relative font-orbitron font-bold tracking-widest px-8 py-4 text-sm overflow-hidden transition-all duration-300"
-            style={{
-              background: '#DAA520',
-              color: '#1C1C1C',
-              clipPath: 'polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#FF6F61'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#DAA520'
-            }}
+        {/* Bio / descriptor */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="font-roboto text-base lg:text-lg max-w-xl leading-relaxed mb-12"
+          style={{ color: 'rgba(245,232,216,0.65)' }}
+        >
+          Building resilient, scalable web systems with meticulous attention to code quality,
+          performance, and user experience. Based in{' '}
+          <span style={{ color: '#DAA520' }}>Nairobi, Kenya</span>.
+        </motion.p>
+
+        {/* CTA row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="flex flex-wrap items-center gap-6"
+        >
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.04, x: 4 }}
+            whileTap={{ scale: 0.96 }}
+            className="font-rajdhani font-600 text-sm tracking-widest uppercase px-8 py-4 relative overflow-hidden group"
+            style={{ background: '#FF6F61', color: '#1C1C1C' }}
           >
-            VIEW PROJECTS
-          </button>
+            <span className="relative z-10">View Work</span>
+            <motion.div
+              className="absolute inset-0"
+              style={{ background: '#FF4500' }}
+              initial={{ x: '-100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.a>
 
-          <button
-            onClick={handleDownload}
-            className="font-orbitron font-bold tracking-widest px-8 py-4 text-sm border transition-all duration-300 hover:bg-white/5"
-            style={{
-              borderColor: 'rgba(245,232,216,0.3)',
-              color: '#F5E8D8',
-              clipPath: 'polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)',
-            }}
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            className="font-rajdhani font-600 text-sm tracking-widest uppercase px-8 py-4 border"
+            style={{ borderColor: 'rgba(245,232,216,0.3)', color: '#F5E8D8' }}
           >
-            DOWNLOAD CV
-          </button>
-        </div>
+            Get In Touch
+          </motion.a>
+        </motion.div>
 
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto">
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.3 }}
+          className="flex flex-wrap gap-12 mt-20 pt-8"
+          style={{ borderTop: '1px solid rgba(245,232,216,0.06)' }}
+        >
           {[
-            { value: '7+', label: 'Years Experience' },
-            { value: '50+', label: 'Projects Shipped' },
-            { value: '3K+', label: 'GitHub Stars' },
+            { value: '4+', label: 'Years Experience' },
+            { value: '15+', label: 'Projects Shipped' },
+            { value: '3', label: 'Companies' },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="font-orbitron font-black text-2xl" style={{ color: '#DAA520' }}>
+            <div key={stat.label}>
+              <div
+                className="font-orbitron text-3xl font-800 leading-none"
+                style={{ color: '#DAA520' }}
+              >
                 {stat.value}
               </div>
-              <div className="font-rajdhani text-xs tracking-widest mt-1" style={{ color: 'rgba(245,232,216,0.4)' }}>
+              <div
+                className="font-rajdhani text-xs tracking-widest uppercase mt-1"
+                style={{ color: 'rgba(245,232,216,0.4)' }}
+              >
                 {stat.label}
               </div>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 float">
-        <span className="font-rajdhani text-xs tracking-widest" style={{ color: 'rgba(245,232,216,0.3)' }}>
-          SCROLL
+      {/* <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        style={{ opacity: 0.4 }}
+      >
+        <div
+          className="w-px h-12"
+          style={{ background: 'linear-gradient(to bottom, transparent, #DAA520)' }}
+        />
+        <span
+          className="font-rajdhani text-xs tracking-widest uppercase"
+          style={{ color: '#DAA520' }}
+        >
+          Scroll
         </span>
-        <div className="w-px h-12" style={{ background: 'linear-gradient(to bottom, #DAA520, transparent)' }} />
+      </motion.div> */}
+
+      {/* Kinetic marquee */}
+      <div
+        className="absolute bottom-0 left-0 right-0 overflow-hidden"
+        style={{ borderTop: '1px solid rgba(218,165,32,0.08)' }}
+      >
+        <div className="marquee-inner py-3" style={{ gap: '3rem' }}>
+          {Array(12)
+            .fill(null)
+            .map((_, i) => (
+              <span
+                key={i}
+                className="font-orbitron text-xs tracking-widest uppercase mx-6"
+                style={{ color: 'rgba(218,165,32,0.2)' }}
+              >
+                {i % 3 === 0 ? 'Fullstack Development' : i % 3 === 1 ? 'Laravel + React' : 'Next.js + TypeScript'}
+                <span className="mx-6" style={{ color: 'rgba(255,111,97,0.3)' }}>*</span>
+              </span>
+            ))}
+        </div>
       </div>
     </section>
-  )
+  );
 }
