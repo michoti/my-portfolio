@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Geist, Orbitron, Rajdhani, Roboto } from "next/font/google";
+import { Analytics } from '@vercel/analytics/react';
 import { cn } from "@/lib/utils";
 
 const geist = Geist({
@@ -61,7 +62,10 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
