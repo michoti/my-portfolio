@@ -203,7 +203,7 @@ export default function ExperienceSection() {
               BSc. Computer Science
             </div>
             <div className="font-roboto text-sm mt-1" style={{ color: 'rgba(245,232,216,0.5)' }}>
-              Africa Nazarene University — June 2018 to November 2022
+              Africa Nazarene University
             </div>
           </div>
         </motion.div>

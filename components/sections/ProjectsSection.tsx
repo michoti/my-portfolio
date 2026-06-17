@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { PROJECTS } from '@/lib/data';
 import { BrushStroke, CodeBrackets } from '@/components/ui/SvgArtwork';
+import Link from 'next/link';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 60 },
@@ -156,12 +157,15 @@ export default function ProjectsSection() {
                     className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ background: 'rgba(255,111,97,0.08)' }}
                   >
-                    <div
+                    <Link
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="border px-6 py-3 font-rajdhani text-sm tracking-widest uppercase"
                       style={{ borderColor: '#FF6F61', color: '#FF6F61' }}
                     >
                       View Project
-                    </div>
+                    </Link>
                   </motion.div>
                 </div>
 

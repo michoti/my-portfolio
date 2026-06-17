@@ -20,6 +20,7 @@ export const PROJECTS = [
     image: UNSPLASH_IMAGES.project1,
     year: '2024',
     role: 'Lead Fullstack Developer',
+    link: "https://github.com/michoti",
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ export const PROJECTS = [
     image: UNSPLASH_IMAGES.project2,
     year: '2023',
     role: 'Fullstack Engineer',
+    link: "https://soko-yetu.vercel.app/",
   },
   {
     id: 3,
@@ -42,6 +44,7 @@ export const PROJECTS = [
     image: UNSPLASH_IMAGES.project3,
     year: '2023',
     role: 'Frontend Architect',
+    link: "https://github.com/michoti",
   },
 ];
 
