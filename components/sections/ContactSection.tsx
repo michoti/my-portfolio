@@ -15,7 +15,7 @@ export default function ContactSection() {
     { label: 'Phone', value: '+254 705 223 948', href: 'tel:+254705223948' },
     { label: 'LinkedIn', value: 'Emmanuel Mogendi', href: 'https://linkedin.com/in/emmanuelmogendi-486729353/' },
     { label: 'GitHub', value: 'github.com/michoti', href: 'https://github.com/michoti' },
-    { label: 'Portfolio', value: 'emmanuel-michoti.netlify.app', href: 'https://www.emmanuel-michoti.netlify.app' },
+    { label: 'Portfolio', value: 'emmanuel-michoti.vercel.app', href: 'https://www.emmanuel-michoti.vercel.app' },
   ];
 
   return (
